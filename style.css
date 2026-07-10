@@ -1,0 +1,437 @@
+/* ============================================================
+   style.css — gemeinsames Stylesheet für alle drei Seiten.
+   Version 2: lebendigeres Design mit Farbverlauf-Hero,
+   Animationen und Hover-Effekten.
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* CSS-Variablen: einmal definiert, überall per var(--name) nutzbar. */
+:root {
+  --gruen-dunkel: #0b4d3a;
+  --gruen: #14805f;
+  --gruen-hell: #23c08c;
+  --mint: #e6f7f0;
+  --gelb: #ffd166;                 /* Akzent für Badge & Highlights */
+  --farbe-text: #21302b;
+  --farbe-text-hell: #5b6b64;
+  --farbe-rand: #e3e9e6;
+  /* Der Farbverlauf wird mehrfach benutzt, deshalb auch als Variable: */
+  --verlauf: linear-gradient(135deg, #0b4d3a 0%, #14805f 55%, #1d9d74 100%);
+}
+
+html {
+  scroll-behavior: smooth;         /* sanftes Scrollen bei #anker-Links */
+}
+
+body {
+  /* System-Schriften: kein Download nötig, DSGVO-unkritisch. */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  color: var(--farbe-text);
+  line-height: 1.65;
+  background: #fbfdfc;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ============================================================
+   Einblend-Animation: Elemente mit der Klasse .fade-in gleiten
+   beim Laden sanft von unten ein. @keyframes definiert die
+   Animation, animation wendet sie an.
+   ============================================================ */
+@keyframes hochgleiten {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: hochgleiten 0.7s ease-out both;
+}
+
+/* Verzögerungs-Klassen: Elemente erscheinen nacheinander statt
+   gleichzeitig — wirkt lebendiger. */
+.fade-in.verzoegert-1 { animation-delay: 0.15s; }
+.fade-in.verzoegert-2 { animation-delay: 0.3s; }
+.fade-in.verzoegert-3 { animation-delay: 0.45s; }
+
+/* ---------- Kopfbereich ---------- */
+/* Der Header liegt ÜBER dem Hero-Verlauf, daher transparent + weiß. */
+header {
+  position: absolute;              /* schwebt über dem Hero */
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.4rem 0;
+  z-index: 10;                     /* über allem anderen */
+}
+
+.wortmarke {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+/* Auf den Rechtsseiten (heller Hintergrund) braucht der Header
+   eine eigene Variante — Klasse .header-hell am <header>. */
+.header-hell {
+  position: static;                /* normal im Textfluss */
+  border-bottom: 1px solid var(--farbe-rand);
+  background: #fff;
+}
+
+.header-hell .wortmarke {
+  color: var(--gruen);
+}
+
+/* ---------- Hero (Farbverlauf über volle Breite) ---------- */
+.hero {
+  background: var(--verlauf);
+  color: #ffffff;
+  padding: 7rem 0 4.5rem;          /* oben Platz für den schwebenden Header */
+  position: relative;
+  overflow: hidden;                /* schneidet die Deko-Kreise ab */
+}
+
+/* Zwei dekorative, halbtransparente Kreise im Hintergrund —
+   reine CSS-Deko über ::before/::after, kein Bild nötig. */
+.hero::before,
+.hero::after {
+  content: "";                     /* Pflicht, sonst wird nichts gerendert */
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.hero::before {
+  width: 420px;
+  height: 420px;
+  top: -140px;
+  right: -100px;
+}
+
+.hero::after {
+  width: 260px;
+  height: 260px;
+  bottom: -110px;
+  left: -70px;
+}
+
+.hero .container {
+  position: relative;              /* hebt Inhalt über die Deko-Kreise */
+  z-index: 1;
+}
+
+.status-badge {
+  display: inline-block;
+  background: var(--gelb);
+  color: #4a3900;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1.4rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.1rem); /* clamp(): skaliert mit der Bildschirmbreite,
+                                          bleibt aber zwischen Min und Max */
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.1rem;
+  max-width: 620px;
+}
+
+.hero .untertitel {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 560px;
+  margin-bottom: 2rem;
+}
+
+/* Call-to-Action-Button im Hero: <a> als Button gestylt. */
+.cta-button {
+  display: inline-block;
+  background: #ffffff;
+  color: var(--gruen-dunkel);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);     /* hebt sich leicht an */
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+}
+
+/* Wellen-Übergang unten am Hero: das SVG steht im HTML,
+   hier wird es nur positioniert. */
+.welle {
+  display: block;
+  width: 100%;
+  height: 70px;
+  margin-top: 3rem;
+}
+
+/* ---------- Countdown ---------- */
+.countdown {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.countdown .einheit {
+  background: #ffffff;
+  border: 1px solid var(--farbe-rand);
+  border-radius: 14px;
+  padding: 1rem 1.4rem;
+  min-width: 96px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(11, 77, 58, 0.06);
+}
+
+.countdown .zahl {
+  display: block;
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--gruen);
+  line-height: 1.1;
+  /* Ziffern gleich breit → Zahlen "springen" beim Runterzählen nicht: */
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown .beschriftung {
+  font-size: 0.8rem;
+  color: var(--farbe-text-hell);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.countdown-hinweis {
+  text-align: center;
+  color: var(--farbe-text-hell);
+  font-size: 0.95rem;
+}
+
+/* ---------- Inhaltsbereiche ---------- */
+section {
+  padding: 3rem 0 1rem;
+}
+
+section h2 {
+  font-size: 1.6rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.9rem;
+}
+
+section p + p {
+  margin-top: 0.75rem;
+}
+
+.zentriert {
+  text-align: center;
+}
+
+/* ---------- Schritt-Karten ---------- */
+.schritte {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.1rem;
+  margin-top: 1.5rem;
+}
+
+.schritt {
+  background: #ffffff;
+  border: 1px solid var(--farbe-rand);
+  border-radius: 16px;
+  padding: 1.6rem 1.4rem;
+  box-shadow: 0 4px 14px rgba(11, 77, 58, 0.05);
+  /* transition = weiche Überblendung, wenn sich Werte ändern (Hover): */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.schritt:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(11, 77, 58, 0.12);
+}
+
+/* Icon-Kreis: das SVG-Icon steht im HTML, hier nur der farbige Kreis. */
+.icon-kreis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  background: var(--mint);
+  border-radius: 12px;
+  margin-bottom: 0.9rem;
+}
+
+.icon-kreis svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke: var(--gruen);            /* Linienfarbe der Icons */
+}
+
+.schritt h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.schritt p {
+  font-size: 0.95rem;
+  color: var(--farbe-text-hell);
+}
+
+/* ---------- E-Mail-Anmeldung ---------- */
+.anmeldung {
+  background: var(--verlauf);
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 2.6rem 2rem;
+  margin: 3rem 0 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* gleiche Deko-Kreis-Idee wie im Hero, nur kleiner: */
+.anmeldung::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  top: -90px;
+  right: -60px;
+}
+
+.anmeldung h2,
+.anmeldung p,
+.anmeldung form {
+  position: relative;              /* über dem Deko-Kreis */
+  z-index: 1;
+}
+
+.anmeldung > p {
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.formular-zeile {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.4rem;
+}
+
+.formular-zeile input[type="email"] {
+  flex: 1 1 260px;
+  max-width: 340px;
+  padding: 0.85rem 1.1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 999px;
+}
+
+.formular-zeile button {
+  padding: 0.85rem 1.7rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gruen-dunkel);
+  background: var(--gelb);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.formular-zeile button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);        /* macht den Button minimal heller */
+}
+
+.kleingedrucktes {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 1rem;
+}
+
+.kleingedrucktes a {
+  color: #ffffff;
+}
+
+/* ---------- Rechtlicher Hinweis ---------- */
+.hinweis-box {
+  border: 1px solid var(--farbe-rand);
+  border-left: 4px solid var(--gruen);
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.1rem 1.35rem;
+  font-size: 0.9rem;
+  color: var(--farbe-text-hell);
+  margin: 1.5rem 0 2.5rem;
+}
+
+/* ---------- Fußzeile ---------- */
+footer {
+  border-top: 1px solid var(--farbe-rand);
+  padding: 1.75rem 0 2.5rem;
+  font-size: 0.9rem;
+  color: var(--farbe-text-hell);
+}
+
+footer nav a {
+  color: var(--farbe-text-hell);
+  margin-right: 1.25rem;
+}
+
+/* ---------- Rechtsseiten (Impressum/Datenschutz) ---------- */
+.rechtstext {
+  padding-bottom: 2rem;
+}
+
+.rechtstext h1 {
+  font-size: 1.8rem;
+  margin: 2.5rem 0 1rem;
+}
+
+.rechtstext h2 {
+  font-size: 1.15rem;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.rechtstext p,
+.rechtstext ul {
+  margin-bottom: 0.75rem;
+}
+
+.rechtstext ul {
+  padding-left: 1.4rem;
+}
+
+.platzhalter {
+  background: #fff3cd;
+  padding: 0 0.25rem;
+  border-radius: 3px;
+  font-weight: 600;
+}

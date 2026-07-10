@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wechslar — KFZ-Versicherungswechsel einfach im Blick</title>
+  <meta name="description"
+    content="Wechslar entsteht: Ein Erinnerungsservice rund um die jährliche Kündigungsfrist der KFZ-Versicherung. Jetzt informieren.">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Header schwebt transparent ÜBER dem Farbverlauf (siehe CSS:
+       position: absolute). Auf den Rechtsseiten gibt es stattdessen
+       die Variante .header-hell. -->
+  <header>
+    <div class="container">
+      <a href="index.html" class="wortmarke">Wechslar</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ================= HERO =================
+         Volle Breite mit Farbverlauf. Die .fade-in-Klassen lassen die
+         Elemente nacheinander einblenden (reines CSS, kein JS). -->
+    <div class="hero">
+      <div class="container">
+        <span class="status-badge fade-in">🚧 In Entwicklung</span>
+        <h1 class="fade-in verzoegert-1">
+          Die KFZ-Kündigungsfrist verpasst?<br>Ab jetzt nicht mehr.
+        </h1>
+        <p class="untertitel fade-in verzoegert-2">
+          Wechslar wird ein unabhängiger Erinnerungsservice rund um den
+          jährlichen Wechsel der KFZ-Versicherung — damit der Stichtag
+          (in der Regel der 30.&nbsp;November) nie wieder unbemerkt
+          verstreicht.
+        </p>
+        <!-- Link zum Anmelde-Formular weiter unten; durch
+             scroll-behavior: smooth im CSS gleitet die Seite sanft hin. -->
+        <a href="#anmeldung" class="cta-button fade-in verzoegert-3">
+          Beim Start dabei sein ↓
+        </a>
+      </div>
+
+      <!-- Wellen-Übergang vom Verlauf zum hellen Hintergrund.
+           Ein SVG-<path> zeichnet die Kurve; fill = Farbe der Seite
+           darunter, so entsteht der "Wellen-Ausschnitt". -->
+      <svg class="welle" viewBox="0 0 1440 70" preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M0,40 C360,90 1080,-10 1440,40 L1440,70 L0,70 Z"
+          fill="#fbfdfc"></path>
+      </svg>
+    </div>
+
+    <div class="container">
+
+      <!-- ================= COUNTDOWN =================
+           Läuft live bis zum nächsten 30. November — das Skript dazu
+           steht unten vor </body>. -->
+      <section class="zentriert">
+        <h2>So lange läuft die Wechselsaison noch</h2>
+        <p class="countdown-hinweis">
+          Ordentliche Kündigung ist bei den meisten Verträgen bis zum
+          <strong>30. November</strong> möglich.
+        </p>
+        <div class="countdown" id="countdown" aria-live="polite">
+          <!-- Die Zahlen hier sind nur Startwerte — JavaScript ersetzt
+               sie sofort durch die echten. -->
+          <div class="einheit">
+            <span class="zahl" id="cd-tage">–</span>
+            <span class="beschriftung">Tage</span>
+          </div>
+          <div class="einheit">
+            <span class="zahl" id="cd-stunden">–</span>
+            <span class="beschriftung">Stunden</span>
+          </div>
+          <div class="einheit">
+            <span class="zahl" id="cd-minuten">–</span>
+            <span class="beschriftung">Minuten</span>
+          </div>
+          <div class="einheit">
+            <span class="zahl" id="cd-sekunden">–</span>
+            <span class="beschriftung">Sekunden</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= WORUM GEHT ES ================= -->
+      <section>
+        <h2>Worum geht es?</h2>
+        <p>
+          Die meisten KFZ-Versicherungsverträge in Deutschland lassen sich
+          nur einmal im Jahr ordentlich kündigen — mit einer Frist von einem
+          Monat zum Jahresende. Wer den Stichtag verpasst, bleibt ein
+          weiteres Jahr im alten Vertrag, auch wenn es am Markt längst
+          passendere Angebote gibt.
+        </p>
+        <p>
+          Wechslar entsteht als schlanker Service, der genau dieses Problem
+          angeht: rechtzeitig erinnern, verständlich informieren und den Weg
+          zu etablierten, lizenzierten Vergleichsportalen weisen. Kein
+          Papierkram, kein Abtippen, keine Verpflichtung.
+        </p>
+      </section>
+
+      <!-- ================= 3 SCHRITTE =================
+           Die Icons sind Inline-SVGs: kleine Vektorgrafiken direkt im
+           HTML — kein Bild-Download, Farbe steuerbar per CSS (stroke). -->
+      <section>
+        <h2>So soll es funktionieren</h2>
+        <div class="schritte">
+
+          <div class="schritt">
+            <div class="icon-kreis">
+              <!-- Glocken-Icon (Erinnerung) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+            </div>
+            <h3>Erinnerung einrichten</h3>
+            <p>Einmal anmelden — Wechslar meldet sich rechtzeitig vor der
+              Kündigungsfrist per E-Mail.</p>
+          </div>
+
+          <div class="schritt">
+            <div class="icon-kreis">
+              <!-- Buch-Icon (Informieren) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+            </div>
+            <h3>Informiert bleiben</h3>
+            <p>Verständliche, allgemeine Informationen rund um Fristen und
+              den Ablauf eines Versicherungswechsels.</p>
+          </div>
+
+          <div class="schritt">
+            <div class="icon-kreis">
+              <!-- Pfeil-Icon (Weiterleitung) -->
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 17L17 7" />
+                <path d="M7 7h10v10" />
+              </svg>
+            </div>
+            <h3>Selbst vergleichen</h3>
+            <p>Wer wechseln möchte, wird an etablierte externe
+              Vergleichsportale weitergeleitet und entscheidet dort selbst.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= E-MAIL-ANMELDUNG =================
+           action ist noch ein Platzhalter — Brevo-Formular-URL eintragen! -->
+      <section class="anmeldung" id="anmeldung">
+        <h2>Interesse? Auf dem Laufenden bleiben</h2>
+        <p>
+          Trag dich ein und erfahre als Erste:r, wenn Wechslar startet.
+          Keine Werbung, jederzeit abbestellbar.
+        </p>
+        <form action="#BREVO-FORMULAR-URL-HIER-EINFUEGEN" method="POST">
+          <div class="formular-zeile">
+            <input type="email" name="EMAIL" placeholder="deine@email.de"
+              required aria-label="E-Mail-Adresse">
+            <button type="submit">Benachrichtigen</button>
+          </div>
+        </form>
+        <p class="kleingedrucktes">
+          Mit dem Absenden willigst du ein, dass deine E-Mail-Adresse zum
+          Zweck der Projekt-Benachrichtigung gespeichert wird. Details und
+          Widerrufsmöglichkeit in der
+          <a href="datenschutz.html">Datenschutzerklärung</a>.
+        </p>
+      </section>
+
+      <!-- Tippgeber-Abgrenzung (§34d GewO) — inhaltlich unverändert. -->
+      <div class="hinweis-box">
+        <strong>Transparenzhinweis:</strong> Wechslar ist kein
+        Versicherungsvermittler und kein Versicherungsberater. Es werden
+        keine Versicherungsverträge vermittelt, keine Tarife bewertet und
+        keine individuellen Empfehlungen ausgesprochen. Der geplante Service
+        beschränkt sich auf allgemeine Informationen, Terminerinnerungen und
+        die Weiterleitung an externe, eigenständige Vergleichsportale.
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <nav>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutzerklärung</a>
+      </nav>
+      <p>© 2026 Wechslar — Projekt im Aufbau</p>
+    </div>
+  </footer>
+
+  <!-- ================= COUNTDOWN-SKRIPT =================
+       Steht bewusst am Ende des <body>: so ist das HTML oben schon
+       geladen, bevor das Skript darauf zugreift. -->
+  <script>
+    // Ziel bestimmen: der nächste 30. November, 23:59:59 Uhr.
+    // Monate zählen in JS ab 0 → 10 = November.
+    function naechsterStichtag() {
+      const jetzt = new Date();
+      let ziel = new Date(jetzt.getFullYear(), 10, 30, 23, 59, 59);
+      // Liegt der 30.11. dieses Jahr schon hinter uns? Dann nächstes Jahr.
+      if (ziel < jetzt) {
+        ziel = new Date(jetzt.getFullYear() + 1, 10, 30, 23, 59, 59);
+      }
+      return ziel;
+    }
+
+    function countdownAktualisieren() {
+      // Differenz in Millisekunden zwischen Stichtag und jetzt:
+      const rest = naechsterStichtag() - new Date();
+
+      // Millisekunden in Tage/Stunden/Minuten/Sekunden umrechnen.
+      // Math.floor() schneidet Nachkommastellen ab, % ist der Restwert.
+      const sek = Math.floor(rest / 1000);
+      const tage = Math.floor(sek / 86400);        // 86400 Sek. = 1 Tag
+      const stunden = Math.floor((sek % 86400) / 3600);
+      const minuten = Math.floor((sek % 3600) / 60);
+      const sekunden = sek % 60;
+
+      // Werte in die vier HTML-Elemente schreiben.
+      // document.getElementById() findet ein Element über sein id-Attribut.
+      document.getElementById("cd-tage").textContent = tage;
+      document.getElementById("cd-stunden").textContent = stunden;
+      document.getElementById("cd-minuten").textContent = minuten;
+      document.getElementById("cd-sekunden").textContent = sekunden;
+    }
+
+    countdownAktualisieren();                 // einmal sofort ausführen …
+    setInterval(countdownAktualisieren, 1000); // … dann jede Sekunde erneut
+  </script>
+
+</body>
+</html>
