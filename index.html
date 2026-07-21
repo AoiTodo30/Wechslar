@@ -159,19 +159,31 @@
       </section>
 
       <!-- ================= E-MAIL-ANMELDUNG =================
-           action ist noch ein Platzhalter — Brevo-Formular-URL eintragen! -->
+           Das Formular schickt die Daten per POST direkt an Brevo
+           (Double-Opt-in: Adresse wird erst nach Bestätigungs-Klick
+           gespeichert). Nach dem Absenden zeigt Brevo eine eigene
+           Bestätigungsseite an. -->
       <section class="anmeldung" id="anmeldung">
         <h2>Interesse? Auf dem Laufenden bleiben</h2>
         <p>
           Trag dich ein und erfahre als Erste:r, wenn Wechslar startet.
           Keine Werbung, jederzeit abbestellbar.
         </p>
-        <form action="#BREVO-FORMULAR-URL-HIER-EINFUEGEN" method="POST">
+        <form method="POST" data-type="subscription"
+          action="https://b2b285cf.sibforms.com/serve/MUIFAHJ3tC03WfI8XcpGlz3VEfprpI8X96Vhe8pkIjIJdf3-Dt5LpEnVIsVc624kRN-SD1WussaJykTbsqaj_eAPYjM6owhcLwcxyZZawgbNseckTIvZkC3GHdrHp5izY_92x2VV9fRVaHG1r4Xs8D1KLBPtADOnTln7cEfHloAZ36pETCd6SBatsbCaKcDs1gvyRK1y0w18k1oDUg==">
           <div class="formular-zeile">
             <input type="email" name="EMAIL" placeholder="deine@email.de"
               required aria-label="E-Mail-Adresse">
             <button type="submit">Benachrichtigen</button>
           </div>
+          <!-- Honeypot-Spamschutz von Brevo: Menschen sehen dieses Feld
+               nicht (display:none) und lassen es leer — Bots füllen es
+               aus und werden von Brevo aussortiert. NICHT löschen! -->
+          <input type="text" name="email_address_check" value=""
+            style="display:none" tabindex="-1" autocomplete="off"
+            aria-hidden="true">
+          <!-- Sagt Brevo, dass Bestätigungsseite/-mails auf Deutsch sind: -->
+          <input type="hidden" name="locale" value="de">
         </form>
         <p class="kleingedrucktes">
           Mit dem Absenden willigst du ein, dass deine E-Mail-Adresse zum
